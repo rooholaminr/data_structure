@@ -1,0 +1,193 @@
+Time Complexity of Algorithms
+=======================================
+
+let's assume that we all know what is the subject of this presentation.
+In the following we are going to watch how deciding on type of our algorithm can make difference in run time of our algorithm.
+I suggest if you don't know the main idea just google the main title of this page.
+
+
+
+
+####first let's see a complexity chart 
+I wanted to hide the code for creating this plot but sometimes I don't feel like being humble. so :
+
+```{r echo = F,warning=F}
+n  = function(x)
+      x
+logn = function(x)
+      log2(x)
+nlogn = function(x)
+      x * log2(x)
+n2 = function(x)
+      x ^ 2
+pow2n = function(x)
+      2 ^ x
+factn = function(x)
+      factorial(x)
+```
+```{r echo = T,warning=F,fig.height=8,fig.width=12}
+library(ggplot2) ; library(RColorBrewer)
+xd <- data.frame(x = c(0.01, 15))
+cl <- brewer.pal(n = 6,name = 'Set2')
+
+g <- ggplot(data = xd, aes(x = x))
+g <- g + stat_function(fun = n , size = 1.5, aes(color = cl[1])) +
+      stat_function(fun = logn , size = 1.5, aes(color = cl[2])) +
+      stat_function(fun = nlogn , size = 1.5, aes(color = cl[3])) +
+      stat_function(fun = n2, size = 1.5, aes(color = cl[4])) +
+      stat_function(fun = pow2n , size = 1.5, aes(color = cl[5])) +
+      stat_function(fun = factn , size = 1.5, aes(color = cl[6]))
+g <- g + scale_color_identity(
+      name = 'complexity Chart',
+      breaks = cl,
+      labels = c('n', 'log(n)', 'n*log(n)', 'n^2', '2^n', 'n!'),
+      guide = 'legend'
+)
+g <- g + ylim(c(-10, 200))
+g <- g + labs(x = 'Elements',y ='Operations')
+g
+```
+
+***
+
+# Search algorithms
+
+our first two algorithms to investigate are binary search and linear search.
+binary works with log(n) and linear as its name suggests has a big-O of n.
+
+## O( $\log n$ ) | Binary Search
+
+
+in this section an algorithm with Big-O of level log(n) will be explained and simulated.
+
+binary search is one of the fastest algorithms which has some assumptions.
+let's take a look at this GIF :
+![binary search](./bins.gif)
+
+I believe this image prepared us for jumping into codeing section but before that let's declare or assumptions:  
+
+* the array we pass to our function *must* be **sorted** in an ascending way. why? think about we we're going to measure
+
+* another assumption is our target element is inside the array
+
+```{r binarysearch function, echo=T,warning=F}
+bin_search <- function (v, t) {
+      lo <- 1
+      hi <- length(v)
+      while (lo <= hi) {
+            mid = round((lo + hi) / 2)
+            
+            if (abs(v[mid] - t) <= 0 ) {
+                  return(mid)
+                  break
+            } else if (v[mid] < t) {
+                  lo = mid + 1
+            } else {
+                  hi = mid - 1
+            }
+      }
+}
+```
+
+let's test this function with an array of random generated numbers , huh? :
+
+```{r}
+test_array <- seq(from = 7,to = 2100,by = 7)
+test_array[276]
+```
+
+so we want to find out whether the function outputs 276 when we pass 1932 to it or not. we'll see:
+
+```{r}
+bin_search(v = test_array,t = 1932)
+```
+
+looks like our function works properly. 
+now it's time for   
+
+
+### Simulation
+
+in order to report a rather precise number I couldn't use R language's built in function which is named ```{r} Sys.time()```
+so I went through an advanced package named microbenchmark.
+I used **uniform distribution** for creating random numbers and I ran my time measuring for 50 times in order to have more coherent data.
+
+```{r}
+library(microbenchmark)
+set.seed(12345)
+df <- microbenchmark(
+bin2   =  bin_search(v = seq(1,100),t = round(runif(1,min = 1,max = 100))),
+bin3 =  bin_search(v = seq(1,1000),t = round(runif(1,min = 1,max = 1000))),
+bin4   =  bin_search(v = seq(1,10000),t = round(runif(1,min = 1,max = 10000))),
+bin5 =  bin_search(v = seq(1,100000),t = round(runif(1,min = 1,max = 100000))),
+bin6   =  bin_search(v = seq(1,1000000),t = round(runif(1,min = 1,max = 1000000))),
+times = 50,unit = 'ms')
+
+df
+```
+
+and finally plots of these numbers :
+```{r}
+
+cl2 <- brewer.pal(name = 'Accent', n =6)
+boxplot(df,col = cl2,log = T,outline = F,ylime = c(10,55))
+```
+```{r,warning=F}
+autoplot(df)
+```
+
+***
+
+## O(n) | linear search
+
+as an example of linear search I'm going to implement **linear search** which which is a loop over an array to find the target.
+
+```{r}
+ls <- function(v,t){
+      c = F
+      l <- length(v)
+      for (i in 1:l){
+            if (v[i] == t){
+                  return(i)
+                  c = T
+            }
+      }
+      if (c == F){
+            return('Not in Vector')
+      }
+}
+```
+
+it was an easy one. let's test it.
+
+```{r}
+vector_test <- seq(1,700,by = 2)
+target <- 451
+ans <- ls(vector_test,target)
+ans
+```
+ doing double check :
+```{r}
+vector_test[ans]
+```
+
+it works. so now we can jump to simulation:
+I'm going to repeat what we did for binary search.so I just hide the code for simulation.
+
+```{r}
+library(microbenchmark)
+set.seed(12345)
+df1 <- microbenchmark(
+bin2   =  ls(v = seq(1,100),t = round(runif(1,min = 1,max = 100))),
+bin3   =  ls(v = seq(1,1000),t = round(runif(1,min = 1,max = 1000))),
+bin4   =  ls(v = seq(1,10000),t = round(runif(1,min = 1,max = 10000))),
+bin5   =  ls(v = seq(1,100000),t = round(runif(1,min = 1,max = 100000))),
+bin6   =  ls(v = seq(1,1000000),t = round(runif(1,min = 1,max = 1000000))),
+times = 50,unit = 'ms')
+
+df1
+```
+```{r}
+autoplot(df1)
+```
+

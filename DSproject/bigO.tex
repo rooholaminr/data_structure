@@ -1,0 +1,297 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{}
+    \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+
+\section{Time Complexity of
+Algorithms}\label{time-complexity-of-algorithms}
+
+let's assume that we all know what is the subject of this presentation.
+In the following we are going to watch how deciding on type of our
+algorithm can make difference in run time of our algorithm. I suggest if
+you don't know the main idea just google the main title of this page.
+
+\paragraph{first let's see a complexity
+chart}\label{first-lets-see-a-complexity-chart}
+
+I wanted to hide the code for creating this plot but sometimes I don't
+feel like being humble. so :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2) ; }\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\NormalTok{xd <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\DecValTok{15}\NormalTok{))}
+\NormalTok{cl <-}\StringTok{ }\KeywordTok{brewer.pal}\NormalTok{(}\DataTypeTok{n =} \DecValTok{6}\NormalTok{,}\DataTypeTok{name =} \StringTok{'Set2'}\NormalTok{)}
+
+\NormalTok{g <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ xd, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x))}
+\NormalTok{g <-}\StringTok{ }\NormalTok{g }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ n , }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ cl[}\DecValTok{1}\NormalTok{])) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ logn , }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ cl[}\DecValTok{2}\NormalTok{])) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ nlogn , }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ cl[}\DecValTok{3}\NormalTok{])) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ n2, }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ cl[}\DecValTok{4}\NormalTok{])) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ pow2n , }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ cl[}\DecValTok{5}\NormalTok{])) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ factn , }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ cl[}\DecValTok{6}\NormalTok{]))}
+\NormalTok{g <-}\StringTok{ }\NormalTok{g }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_identity}\NormalTok{(}
+      \DataTypeTok{name =} \StringTok{'complexity Chart'}\NormalTok{,}
+      \DataTypeTok{breaks =}\NormalTok{ cl,}
+      \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{'n'}\NormalTok{, }\StringTok{'log(n)'}\NormalTok{, }\StringTok{'n*log(n)'}\NormalTok{, }\StringTok{'n^2'}\NormalTok{, }\StringTok{'2^n'}\NormalTok{, }\StringTok{'n!'}\NormalTok{),}
+      \DataTypeTok{guide =} \StringTok{'legend'}
+\NormalTok{)}
+\NormalTok{g <-}\StringTok{ }\NormalTok{g }\OperatorTok{+}\StringTok{ }\KeywordTok{ylim}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DecValTok{200}\NormalTok{))}
+\NormalTok{g <-}\StringTok{ }\NormalTok{g }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{'Elements'}\NormalTok{,}\DataTypeTok{y =}\StringTok{'Operations'}\NormalTok{)}
+\NormalTok{g}
+\end{Highlighting}
+\end{Shaded}
+
+\section[]{\texorpdfstring{\protect\includegraphics{bigO_files/figure-latex/unnamed-chunk-2-1.pdf}}{}}\label{section}
+
+\section{Log(n) ; Binary Search}\label{logn-binary-search}
+
+in this section an algorithm with Big-O of level log(n) will be
+explained and simulated.
+
+binary search is one of the fastest algorithms which has some
+assumptions. let's take a look at this GIF :
+\includegraphics{./bins.gif}
+
+I believe this image prepared us for jumping into codeing section but
+before that let's declare or assumptions:
+
+\begin{itemize}
+\item
+  the array we pass to our function \emph{must} be \textbf{sorted} in an
+  ascending way. why? think about we we're going to measure
+\item
+  another assumption is our target element is inside the array
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bin_search <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (v, t) \{}
+\NormalTok{      lo <-}\StringTok{ }\DecValTok{1}
+\NormalTok{      hi <-}\StringTok{ }\KeywordTok{length}\NormalTok{(v)}
+      \ControlFlowTok{while}\NormalTok{ (lo }\OperatorTok{<=}\StringTok{ }\NormalTok{hi) \{}
+\NormalTok{            mid =}\StringTok{ }\KeywordTok{round}\NormalTok{((lo }\OperatorTok{+}\StringTok{ }\NormalTok{hi) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+            
+            \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{abs}\NormalTok{(v[mid] }\OperatorTok{-}\StringTok{ }\NormalTok{t) }\OperatorTok{<=}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+                  \KeywordTok{return}\NormalTok{(mid)}
+                  \ControlFlowTok{break}
+\NormalTok{            \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (v[mid] }\OperatorTok{<}\StringTok{ }\NormalTok{t) \{}
+\NormalTok{                  lo =}\StringTok{ }\NormalTok{mid }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{            \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{                  hi =}\StringTok{ }\NormalTok{mid }\OperatorTok{-}\StringTok{ }\DecValTok{1}
+\NormalTok{            \}}
+\NormalTok{      \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+let's test this function with an array of random generated numbers ,
+huh? :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test_array <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from =} \DecValTok{7}\NormalTok{,}\DataTypeTok{to =} \DecValTok{2100}\NormalTok{,}\DataTypeTok{by =} \DecValTok{7}\NormalTok{)}
+\NormalTok{test_array[}\DecValTok{276}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1932
+\end{verbatim}
+
+so we want to find out whether the function outputs 276 when we pass
+1932 to it or not. we'll see:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =}\NormalTok{ test_array,}\DataTypeTok{t =} \DecValTok{1932}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 276
+\end{verbatim}
+
+looks like our function works properly. now it's time for
+
+\section{Simulation}\label{simulation}
+
+in order to report a rather precise number I couldn't use R language's
+built in function which is named \texttt{\{r\}\ Sys.time()} so I went
+through an advanced package named microbenchmark. I used \textbf{uniform
+distribution} for creating random numbers and I ran my time measuring
+for 200 times in order to have more coherent data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(microbenchmark)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{12345}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{microbenchmark}\NormalTok{(}
+\DataTypeTok{bin2   =}  \KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{),}\DataTypeTok{t =} \KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{min =} \DecValTok{1}\NormalTok{,}\DataTypeTok{max =} \DecValTok{100}\NormalTok{))),}
+\DataTypeTok{bin3 =}  \KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1000}\NormalTok{),}\DataTypeTok{t =} \KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{min =} \DecValTok{1}\NormalTok{,}\DataTypeTok{max =} \DecValTok{500}\NormalTok{))),}
+\DataTypeTok{bin4   =}  \KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10000}\NormalTok{),}\DataTypeTok{t =} \KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{min =} \DecValTok{1}\NormalTok{,}\DataTypeTok{max =} \DecValTok{1000}\NormalTok{))),}
+\DataTypeTok{bin5 =}  \KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{100000}\NormalTok{),}\DataTypeTok{t =} \KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{min =} \DecValTok{1}\NormalTok{,}\DataTypeTok{max =} \DecValTok{5000}\NormalTok{))),}
+\DataTypeTok{bin6   =}  \KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1000000}\NormalTok{),}\DataTypeTok{t =} \KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{min =} \DecValTok{1}\NormalTok{,}\DataTypeTok{max =} \DecValTok{10000}\NormalTok{))),}
+\DataTypeTok{bin7   =}  \KeywordTok{bin_search}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10000000}\NormalTok{),}\DataTypeTok{t =} \KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{min =} \DecValTok{1}\NormalTok{,}\DataTypeTok{max =} \DecValTok{100000}\NormalTok{))),}
+\DataTypeTok{times =} \DecValTok{200}\NormalTok{)}
+
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Unit: microseconds
+##  expr    min     lq     mean  median     uq      max neval
+##  bin2 10.573 13.971 23.62385 15.8590 25.109  240.142   200
+##  bin3  8.684 16.614 38.63841 18.5020 30.018 2256.799   200
+##  bin4 15.859 19.257 29.12337 26.0540 33.794  201.251   200
+##  bin5 17.747 21.901 42.59546 23.7890 39.269  864.660   200
+##  bin6 17.369 24.921 37.84739 26.4310 40.968  368.519   200
+##  bin7 20.768 27.564 42.04795 29.6405 45.499  308.106   200
+\end{verbatim}
+
+and finally plots of these numbers :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cl2 <-}\StringTok{ }\KeywordTok{brewer.pal}\NormalTok{(}\DataTypeTok{name =} \StringTok{'Accent'}\NormalTok{, }\DataTypeTok{n =}\DecValTok{6}\NormalTok{)}
+\KeywordTok{boxplot}\NormalTok{(df,}\DataTypeTok{col =}\NormalTok{ cl2,}\DataTypeTok{log =}\NormalTok{ T,}\DataTypeTok{outline =}\NormalTok{ F,}\DataTypeTok{ylime =} \KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{55}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bigO_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{autoplot}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
+\end{verbatim}
+
+\includegraphics{bigO_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+
+\end{document}

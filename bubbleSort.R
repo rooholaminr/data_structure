@@ -1,20 +1,11 @@
-## bubble sort is one of sort algorithms with order n^2
-swapp <- function(i,j,v){
-      itemp <- v[i]
-      jtemp <- v[j]
-      v[i] <- jtemp
-      v[j] <- itemp
-      return(v)
-}
-
-bubblesort <- function(v){
-     nv <- length(v)
-     for(i in 1:(nv-1)){
-           for (j in (i+1):nv){
-                 if(v[j] < v[i]){
-                       v <- swapp(j,i,v)
-                 }
-           }
-     }
-     return(v)
+bubblesort <- function(arr){
+      n <- length(arr)
+      for(i in 1:n){
+            for(j in 1:(n-1)){
+                  if(arr[j] > arr[j + 1]){
+                        arr[c(j,j+1)] <- arr[c(j+1,j)]
+                  }
+            }
+      }
+      return(arr)
 }
